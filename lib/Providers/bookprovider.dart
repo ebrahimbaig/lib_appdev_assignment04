@@ -13,6 +13,7 @@ class BooksProvider with ChangeNotifier {
   void fetchBooks() async {
     isBooksFetching = true;
     // notifyListeners();
+    //commits
     books = await _BookRepo.fetchBookList();
     isBooksFetching = false;
     notifyListeners();
