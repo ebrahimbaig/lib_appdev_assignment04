@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/lib_appdev_assignment.iml" filepath="$PROJECT_DIR$/lib_appdev_assignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/lib_appdev_assignment_android.iml" filepath="$PROJECT_DIR$/android/lib_appdev_assignment_android.iml" />
+    </modules>
+  </component>
+</project>
