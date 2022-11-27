@@ -47,7 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCount: booklist.length,
                   itemBuilder: (context, index) {
                     return InkWell(
-                      child: bookCard(book: booklist[index],),
+                      child: bookCard(
+                        book: booklist[index],
+                      ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
@@ -56,8 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   }),
             ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.add),
+        label: const Text('Add A Book'),
         onPressed: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => const AddBook()));

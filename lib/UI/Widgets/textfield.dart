@@ -6,7 +6,12 @@ class CustomTextField extends StatefulWidget {
   final String? hint;
   final String? content;
 
-  const CustomTextField({Key? key, required this.label, required this.text, this.hint, this.content})
+  const CustomTextField(
+      {Key? key,
+      required this.label,
+      required this.text,
+      this.hint,
+      this.content})
       : super(key: key);
 
   @override
@@ -16,7 +21,7 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   final TextEditingController controller = TextEditingController();
 
-   @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -30,11 +35,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: TextFormField(
         readOnly: false,
         controller: controller,
-        style: const TextStyle(color: Colors.black),
+        style: const TextStyle(color: Colors.blueGrey),
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
-            borderSide: const BorderSide(width: 1.0, color: Colors.black),
+            borderSide: const BorderSide(width: 1.0, color: Colors.blueGrey),
           ),
           errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
@@ -44,9 +49,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
               borderSide: const BorderSide(width: 2, color: Colors.blue)),
           labelText: widget.label,
           labelStyle: const TextStyle(
-            color: Colors.black,
+            color: Colors.blueGrey,
             fontSize: 15,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           ),
           hintText: widget.hint ?? '',
         ),
@@ -57,7 +62,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           }
           return null;
         },
-        onChanged: (text){
+        onChanged: (text) {
           widget.text(text);
         },
       ),

@@ -1,0 +1,10 @@
+^C:\USERS\EBRAHIM BAIG\DESKTOP\APP DEV 2022\LIB_APPDEV_ASSIGNMENT\BUILD\WINDOWS\CMAKEFILES\3442F968EF085433DE2C95EBC74CB914\GENERATE.STAMP.RULE
+setlocal
+"F:\Visual Studio\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/Ebrahim Baig/Desktop/App Dev 2022/lib_appdev_assignment/windows" "-BC:/Users/Ebrahim Baig/Desktop/App Dev 2022/lib_appdev_assignment/build/windows" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Ebrahim Baig/Desktop/App Dev 2022/lib_appdev_assignment/build/windows/lib_appdev_assignment.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

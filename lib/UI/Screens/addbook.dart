@@ -24,63 +24,64 @@ class _AddBookState extends State<AddBook> {
       appBar: AppBar(
         title: const Text('Add Book'),
       ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomTextField(
-                label: 'Book Name',
-                text: (text) {
-                  name = text;
-                },
-              ),
-              CustomTextField(
-                label: 'Authors',
-                hint: 'Add authors separated by comma (,)',
-                text: (text) {
-                  authors = text;
-                },
-              ),
-              CustomTextField(
-                label: 'Publisher Name',
-                text: (text) {
-                  publisherName = text;
-                },
-              ),
-              CustomTextField(
-                label: 'Image URL',
-                text: (text) {
-                  imageURl = text;
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      Book book = Book(
-                        bookName: name,
-                        authors: authors.replaceAll(' ', '').split(','),
-                        publisherName: publisherName,
-                        bookImageURL:
-                        'https://miro.medium.com/focal/70/70/50/50/1*L6gfDRU9iPXpWx978BzcOw.png',
-                        isfavorite: false,
-                      );
-                      context.read<BooksProvider>().addBook(book);
-                      Navigator.of(context).pop();
-                    }
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomTextField(
+                  label: 'Book Name',
+                  text: (text) {
+                    name = text;
                   },
-                  child: const Text('Save'),
                 ),
-              ),
-            ],
+                CustomTextField(
+                  label: 'Authors',
+                  hint: 'Add authors separated by comma (,)',
+                  text: (text) {
+                    authors = text;
+                  },
+                ),
+                CustomTextField(
+                  label: 'Publisher Name',
+                  text: (text) {
+                    publisherName = text;
+                  },
+                ),
+                CustomTextField(
+                  label: 'Image URL',
+                  text: (text) {
+                    imageURl = text;
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Book book = Book(
+                          bookName: name,
+                          authors: authors.replaceAll(' ', '').split(','),
+                          publisherName: publisherName,
+                          bookImageURL:
+                              'https://miro.medium.com/focal/70/70/50/50/1*L6gfDRU9iPXpWx978BzcOw.png',
+                          isfavorite: false,
+                        );
+                        context.read<BooksProvider>().addBook(book);
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: const Text('Add Book'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
-
