@@ -7,15 +7,39 @@ class BooksProvider with ChangeNotifier {
 
   bool isBooksFetching = false;
 
-  // final BookRepo _BookRepo = FirebaseBooksRepository();
-  final BookRepo _BookRepo = MockBooksRepository();
+  final BookRepo _bookRepo = FirebaseBooksRepository();
+  // final BookRepo _bookRepo = MockBooksRepository();
 
   void fetchBooks() async {
     isBooksFetching = true;
-    // notifyListeners();
-    //commits
-    books = await _BookRepo.fetchBookList();
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+    notifyListeners();
+
+    books = await _bookRepo.fetchBookList();
     isBooksFetching = false;
     notifyListeners();
   }
+
+  void addBook(Book book) async {
+    await _bookRepo.addBook(book);
+    fetchBooks();
+  }
+
+  void updateBook(Book book) async {
+    await _bookRepo.updateBook(book);
+    fetchBooks();
+  }
+
+  void deleteBook(Book book) async {
+    await _bookRepo.deleteBook(book);
+    fetchBooks();
+  }
+
+  void markFavorite(Book book) async {
+    await _bookRepo.markFavorite(book);
+    fetchBooks();
+  }
+
 }

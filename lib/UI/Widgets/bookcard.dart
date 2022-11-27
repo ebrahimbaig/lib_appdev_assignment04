@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lib_appdev_assignment/UI/Widgets/favouriteicon.dart';
+import 'package:provider/provider.dart';
+
+import '../../Models/books.dart';
+import '../../Providers/bookprovider.dart';
 
 class bookCard extends StatefulWidget {
-  const bookCard(
-      {super.key,
-      required this.bookName,
-      required this.authors,
-      required this.isFav,
-      required this.bookImageURL});
+  Book book;
 
-  final String bookName;
-  final List<String> authors;
-  final bool isFav;
-  final String bookImageURL;
+  bookCard({super.key, required this.book});
 
   @override
   State<bookCard> createState() => _bookCardState();
@@ -21,15 +17,18 @@ class bookCard extends StatefulWidget {
 class _bookCardState extends State<bookCard> {
   var concatenate = StringBuffer();
   bool fav = false;
+
   @override
   void initState() {
-    bool fav = widget.isFav;
+    super.initState();
+    fav = widget.book.isfavorite;
     // TODO: implement initState
-    widget.authors.forEach((item) {
-      concatenate.write(item + ' ');
-      print(concatenate);
-      print(widget.bookName);
-    });
+    for (var item in widget.book.authors) {
+      concatenate.write(
+          widget.book.authors.indexOf(item) != (widget.book.authors.length - 1)
+              ? '$item, '
+              : item);
+    }
   }
 
   @override
@@ -44,10 +43,10 @@ class _bookCardState extends State<bookCard> {
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
-              color: Color.fromARGB(66, 56, 56, 56).withOpacity(0.1),
+              color: const Color.fromARGB(66, 56, 56, 56).withOpacity(0.1),
               spreadRadius: 0,
-              blurRadius: 30,
-              offset: Offset(0, 3), // changes position of shadow
+              blurRadius: 10,
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -63,7 +62,7 @@ class _bookCardState extends State<bookCard> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(60),
                       image: DecorationImage(
-                          image: NetworkImage(widget.bookImageURL),
+                          image: NetworkImage(widget.book.bookImageURL),
                           fit: BoxFit.fill)),
                 ),
                 const SizedBox(
@@ -76,7 +75,7 @@ class _bookCardState extends State<bookCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.bookName,
+                          widget.book.bookName,
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -96,11 +95,8 @@ class _bookCardState extends State<bookCard> {
             ),
             isfavIcon(
                 onTap: () {
-                  setState(
-                    () {
-                      fav = !fav;
-                    },
-                  );
+                  widget.book.isfavorite = !widget.book.isfavorite;
+                  context.read<BooksProvider>().markFavorite(widget.book);
                 },
                 color: fav)
           ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib_appdev_assignment/Providers/bookprovider.dart';
+import 'package:lib_appdev_assignment/UI/Screens/addbook.dart';
+import 'package:lib_appdev_assignment/UI/Screens/bookdetails.dart';
 import 'package:lib_appdev_assignment/UI/Widgets/bookcard.dart';
 import 'package:provider/provider.dart';
 
@@ -44,14 +46,23 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListView.builder(
                   itemCount: booklist.length,
                   itemBuilder: (context, index) {
-                    return bookCard(
-                      bookName: booklist[index].bookName,
-                      authors: booklist[index].authors,
-                      bookImageURL: booklist[index].bookImageURL,
-                      isFav: booklist[index].isfavorite,
+                    return InkWell(
+                      child: bookCard(book: booklist[index],),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                BookDetails(book: booklist[index])));
+                      },
                     );
                   }),
-            ), // This trailing comma makes auto-formatting nicer for build methods.
+            ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => const AddBook()));
+        },
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
