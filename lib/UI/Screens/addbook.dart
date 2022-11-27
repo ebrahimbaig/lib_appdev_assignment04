@@ -66,8 +66,7 @@ class _AddBookState extends State<AddBook> {
                           bookName: name,
                           authors: authors.replaceAll(' ', '').split(','),
                           publisherName: publisherName,
-                          bookImageURL:
-                              'https://miro.medium.com/focal/70/70/50/50/1*L6gfDRU9iPXpWx978BzcOw.png',
+                          bookImageURL: imageURl,
                           isfavorite: false,
                         );
                         context.read<BooksProvider>().addBook(book);

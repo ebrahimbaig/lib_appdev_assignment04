@@ -88,14 +88,12 @@ class _BookDetailsState extends State<BookDetails> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       Book book = Book(
-                        bookName: name,
-                        authors: authors.replaceAll(' ', '').split(','),
-                        publisherName: publisherName,
-                        bookImageURL:
-                        'https://miro.medium.com/focal/70/70/50/50/1*L6gfDRU9iPXpWx978BzcOw.png',
-                        isfavorite: false,
-                        isbnNumber: widget.book.isbnNumber
-                      );
+                          bookName: name,
+                          authors: authors.replaceAll(' ', '').split(','),
+                          publisherName: publisherName,
+                          bookImageURL: imageURl,
+                          isfavorite: false,
+                          isbnNumber: widget.book.isbnNumber);
                       context.read<BooksProvider>().updateBook(book);
                       Navigator.of(context).pop();
                     }
@@ -107,8 +105,8 @@ class _BookDetailsState extends State<BookDetails> {
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton(
                   onPressed: () {
-                      context.read<BooksProvider>().deleteBook(widget.book);
-                      Navigator.of(context).pop();
+                    context.read<BooksProvider>().deleteBook(widget.book);
+                    Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
@@ -123,4 +121,3 @@ class _BookDetailsState extends State<BookDetails> {
     );
   }
 }
-
